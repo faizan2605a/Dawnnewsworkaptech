@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!-- saved from url=(0012)about:srcdoc -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dawn fuel prices widget – preview</title>
+<style>
+  /* Preview page only – not part of the widget */
+  body { margin: 0; padding: 0; background: #fff; font-family: Arial, Helvetica, sans-serif; }
+  .preview-col { width: 300px; margin: 0 auto; }
+</style>
+</head>
+<body>
+<div class="preview-col">
+
+<!-- ================= WIDGET START: copy from here ================= -->
+<style>
+  .dawn-fuel {
+    --df-bg: #0b2a5b;                       /* deep blue background */
+    --df-ink: #ffffff;
+    --df-muted: #b7c6e2;
+    --df-rule: rgba(255,255,255,.18);
+    --df-up: #ff9a90;                       /* price increase */
+    --df-down: #7fe3a8;                     /* price decrease */
+    --df-flat: #b7c6e2;
+    --df-accent: #c8102e;
+    box-sizing: border-box;
+    width: 300px;
+    height: 250px;
+    overflow: hidden;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    background: var(--df-bg);
+    color: var(--df-ink);
+    border-top: 3px solid var(--df-accent);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  .dawn-fuel *, .dawn-fuel *::before, .dawn-fuel *::after { box-sizing: inherit; }
+
+  .dawn-fuel__head { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0 8px; border-bottom: 1px solid var(--df-rule); }
+  .dawn-fuel__title { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 18px; font-weight: 700; line-height: 1.2; }
+  .dawn-fuel__date { margin: 0; color: var(--df-muted); font-size: 12px; }
+
+  .dawn-fuel__items { flex: 1; display: flex; flex-direction: column; }
+  .dawn-fuel__item { flex: 1; display: grid; grid-template-columns: 1fr 128px; column-gap: 10px; align-items: center; border-bottom: 1px solid var(--df-rule); }
+  .dawn-fuel__item:last-child { border-bottom: 0; }
+
+  .dawn-fuel__name { margin: 0 0 3px; font-size: 12px; font-weight: 700; }
+  .dawn-fuel__name span { font-weight: 400; color: var(--df-muted); }
+  .dawn-fuel__price { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 28px; font-weight: 700; line-height: 1; letter-spacing: -0.5px; font-variant-numeric: tabular-nums; }
+
+  .dawn-fuel__facts { margin: 0; }
+  .dawn-fuel__fact + .dawn-fuel__fact { margin-top: 6px; }
+  .dawn-fuel__fact dt { margin: 0; color: var(--df-muted); font-size: 11px; }
+  .dawn-fuel__fact dd { margin: 0; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .dawn-fuel__pct { margin-left: 3px; font-size: 11px; font-weight: 400; }
+
+  .dawn-fuel__price--up   { color: var(--df-up); }
+  .dawn-fuel__price--down { color: var(--df-down); }
+
+  .dawn-fuel__change--up   { color: var(--df-up); }
+  .dawn-fuel__change--down { color: var(--df-down); }
+  .dawn-fuel__change--flat { color: var(--df-flat); }
+  .dawn-fuel__sr { position: absolute; left: -9999px; }
+
+  .dawn-fuel__foot { margin: 0; padding: 6px 0 8px; border-top: 1px solid var(--df-rule); color: var(--df-muted); font-size: 11px; }
+</style>
+
+<!--
+  CMS: output the five data-* values below from your CMS fields.
+  Date is YYYY-MM-DD. Prices are plain numbers (no "Rs", no commas).
+  Values below are from Dawn story 2033537 (prices applicable 30 Sept 2026).
+-->
+<section class="dawn-fuel" id="dawn-fuel" aria-labelledby="dawn-fuel-title" data-date="2026-10-09" data-petrol-old="396.65" data-petrol-new="398.96" data-diesel-old="394.94" data-diesel-new="395.72">
+  <header class="dawn-fuel__head">
+    <h2 class="dawn-fuel__title" id="dawn-fuel-title">Fuel prices</h2>
+    <p class="dawn-fuel__date" id="dawn-fuel-date"><time datetime="2026-10-09">Fri, 9 Oct 2026</time></p>
+  </header>
+  <div class="dawn-fuel__items" id="dawn-fuel-items"><article class="dawn-fuel__item"><div><h3 class="dawn-fuel__name">Petrol <span>(Motor spirit)</span></h3><span class="dawn-fuel__price dawn-fuel__price--up">Rs398.96</span></div><dl class="dawn-fuel__facts"><div class="dawn-fuel__fact"><dt>Old price</dt><dd>Rs396.65</dd></div><div class="dawn-fuel__fact"><dt>Change</dt><dd class="dawn-fuel__change--up"><span class="dawn-fuel__sr">Up </span>▲ +Rs2.31<span class="dawn-fuel__pct">(0.58%)</span></dd></div></dl></article><article class="dawn-fuel__item"><div><h3 class="dawn-fuel__name">Diesel <span>(High speed)</span></h3><span class="dawn-fuel__price dawn-fuel__price--up">Rs395.72</span></div><dl class="dawn-fuel__facts"><div class="dawn-fuel__fact"><dt>Old price</dt><dd>Rs394.94</dd></div><div class="dawn-fuel__fact"><dt>Change</dt><dd class="dawn-fuel__change--up"><span class="dawn-fuel__sr">Up </span>▲ +Rs0.78<span class="dawn-fuel__pct">(0.20%)</span></dd></div></dl></article></div>
+  <p class="dawn-fuel__foot">Rs per litre. Source: Petroleum Division</p>
+</section>
+
+<script>
+(function () {
+  var root = document.getElementById("dawn-fuel");
+  if (!root) return;
+
+  function num(attr) { return parseFloat(root.getAttribute(attr)); }
+  function fmt(n) { return n.toLocaleString("en-PK", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+
+  var date = root.getAttribute("data-date");
+  var products = [
+    { name: "Petrol", detail: "Motor spirit",  oldPrice: num("data-petrol-old"), newPrice: num("data-petrol-new") },
+    { name: "Diesel", detail: "High speed",    oldPrice: num("data-diesel-old"), newPrice: num("data-diesel-new") }
+  ].filter(function (p) { return !isNaN(p.oldPrice) && !isNaN(p.newPrice); });
+
+  var d = new Date(date + "T00:00:00");
+  if (!isNaN(d)) {
+    document.getElementById("dawn-fuel-date").innerHTML =
+      "<time datetime=\"" + date + "\">" +
+      d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", year: "numeric" }) + "</time>";
+  }
+
+  document.getElementById("dawn-fuel-items").innerHTML = products.map(function (p) {
+    var diff = Math.round((p.newPrice - p.oldPrice) * 100) / 100;
+    var pct = p.oldPrice ? (diff / p.oldPrice) * 100 : 0;
+    var dir = diff > 0 ? "up" : diff < 0 ? "down" : "flat";
+    var arrow = dir === "up" ? "\u25B2 " : dir === "down" ? "\u25BC " : "";
+    var sign = dir === "up" ? "+" : dir === "down" ? "\u2212" : "";
+    var word = dir === "up" ? "Up" : dir === "down" ? "Down" : "Unchanged";
+    var text = dir === "flat" ? "No change" : arrow + sign + "Rs" + fmt(Math.abs(diff));
+    var pctHtml = dir === "flat" ? "" : "<span class=\"dawn-fuel__pct\">(" + Math.abs(pct).toFixed(2) + "%)</span>";
+
+    return "<article class=\"dawn-fuel__item\">" +
+      "<div><h3 class=\"dawn-fuel__name\">" + p.name + " <span>(" + p.detail + ")</span></h3>" +
+        "<span class=\"dawn-fuel__price dawn-fuel__price--" + dir + "\">Rs" + fmt(p.newPrice) + "</span></div>" +
+      "<dl class=\"dawn-fuel__facts\">" +
+        "<div class=\"dawn-fuel__fact\"><dt>Old price</dt><dd>Rs" + fmt(p.oldPrice) + "</dd></div>" +
+        "<div class=\"dawn-fuel__fact\"><dt>Change</dt><dd class=\"dawn-fuel__change--" + dir + "\">" +
+          "<span class=\"dawn-fuel__sr\">" + word + " </span>" + text + pctHtml + "</dd></div>" +
+      "</dl></article>";
+  }).join("");
+})();
+</script>
+<!-- ================= WIDGET END: copy up to here ================= -->
+
+</div>
+
+</body></html>
